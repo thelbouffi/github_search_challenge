@@ -1,0 +1,41 @@
+.SF-Title {
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  margin: 1px 0px;
+}
+
+.SF-SubTitle {
+  font-size: 14px;
+  color: darkgray;
+  font-weight: 600;
+  margin: 1px 0px;
+}
+
+.SF-Error {
+  font-size: 1px;
+  color: crimson;
+  font-weight: 4;
+  margin: 10px;
+}
+
+.SF-Input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 350px;
+  border: 1px solid darkgrey;
+  border-radius: 2px;
+  font-weight: 300;
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.SF-Input:focus {
+  outline: 1px solid darkgrey;
+}
+.SF-Input:hover {
+  outline: 1px solid darkgrey;
+}
+

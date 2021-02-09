@@ -1,0 +1,16 @@
+{
+      "type": "object",
+      "properties": {
+        "queryBody": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "type": {
+          "type": "string",
+          "maxLength": 1000,
+          "enum": ["Users", "Repositories", "Issues"]
+        }
+      },
+      "required": ["queryBody", "type"]
+    }
+  

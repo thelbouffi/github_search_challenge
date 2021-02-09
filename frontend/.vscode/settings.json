@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "build": true
+  },
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["typescript", "javascript"],
+}

@@ -1,0 +1,46 @@
+.DD-Toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 23px;
+    width: 120px;
+    color: grey;
+    padding: 10px 12px 9px;
+    border-radius: 2px;
+    border: 1px solid darkgrey;
+    background: white;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.DD-Toggle:hover{
+    outline: 1px solid darkgrey;
+}
+
+.DD-List{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    /* align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 120px;
+    color: grey;
+    padding: 10px 12px 9px;
+    border-radius: 2px;*/
+    border: 1px solid darkgrey;
+    background: white;
+    margin-left: 10px; 
+    padding: 5px 10px;
+    width: 124px;
+}
+
+.DD-Item{
+    color: grey;
+    font-weight: 400;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.DD-Item:hover{
+    color: rgb(63, 62, 62);
+}
