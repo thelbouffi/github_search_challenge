@@ -40,8 +40,8 @@ npm start #or yarn start
 ```
 
 ## Endpoints
-- **POST** http://0.0.0.0:3001/api/search/  
-- **GET** http://0.0.0.0:3001/api/clear-cache  
+- **POST** http://localhost:3001/api/search/  
+- **GET** http://localhost:3001/api/clear-cache  
 with the folowing body attributes:
   - **type** that accept only two values: *Users* for searching for users or *Repositories* for searching for repositories
   - **queryBody** that accept any string value
@@ -75,7 +75,7 @@ http://0.0.0.0:3001/api/search?per_page=10&page=1
   - HTTP methods and controllers associated to each end point
   - whenever we call a route it will look on the array of handlers(controlers) associated to it, to call them one after the other
 - The `./src/controllers` folder contains controllers files used by our routes, for our case we have only one controller file which is `./src/controllers/github.controllers.ts`
-- The `./src/controllers` constains config object for managing:
+- The `./src/config` constains config object for managing:
   - route files paths
   - redis
   - server host and port
@@ -85,8 +85,8 @@ http://0.0.0.0:3001/api/search?per_page=10&page=1
 ## Routes calls
 ### POST http://localhost:3001/api/search/
 - If we make a post request to the server, with new query that is not saved on redis it will trigger the call of the following controllers:
-- validateBody: calls ajv, validate the schema if it's correct, if yes it returns next(), to got to the next controller. and if any error is cateched then we stop the request and return the error
-- redisSearch: check if the request have been already made and still exist on the memory, if yes it responds the results to the user and finish the request, else it goes to the next middlware, and if any error hapend then we cached it and stop the request
+- validateBody: calls ajv, validate the schema if it's correct, if yes it returns next(), to got to the next controller. And if any error is cateched then we stop the request and return the error
+- redisSearch: check if the request have been already made and still exist on the cache memory, if yes it responds the results to the user and finish the request, else it goes to the next middlware, and if any error hapend then we cached it and stop the request
 - restSearch: it call octokit to make a restful call to github api then calls next if no error is catched
 - cacheSave: if the result obtained from github comes with status 200, the result is saved on redis memory, unless some unexpected error hapened then the error is catched
 - sendResults: finally we resond with the result that was obtained from github, unless some error hapend that will be also handled
@@ -99,7 +99,7 @@ http://0.0.0.0:3001/api/search?per_page=10&page=1
 - When calling this end point we will call a controller that calls redis command that flush the database
 
 ## Backend Next Steps
-- Add github access token to be authenticated and be able to have right of 5000 requests per hour available. For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
+- Add github access token to be authenticated and to be able to have right of 5000 requests per hour available. For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
 - Add Swagger documentation
 - Add api test using Supertest
 
@@ -118,8 +118,8 @@ yarn start
 - `./src/index.ts` is the main entry point of our application, it calls :
   - the main component `<App/>` 
   - with `<PersistGate/>` that delays the rendering of our app's UI until the persisted state is retrieved and saved to redux.
-  - and also `<Provider>` that makes the Redux store available to all component under `<App>`
-- `./src/App.ts` is the main component of our application. It's composed by <Router> and <Switch> tags that surround ther other main components. In this component we are defining the routes related to each component
+  - and also `<Provider>` that makes the Redux store available to all components under `<App>`
+- `./src/App.ts` is the main component of our application. It's composed by `<Router>` and `<Switch>` tags that surround the other main components. In this component we are also defining the routes related to each component
 - `./src/pages` folder contains the main components (pages) that will be called by our defined routes. For our case we have 3 main pages (3 main components):
   - `./src/pages/Search.tsx` is a functional compnent responsible for displaying the main page containig only the input field and dropdown menu.
   - `./src/pages/Users.tsx` is a functional component responsible for displayin the results of users search and it's related to the route `/users`
@@ -137,14 +137,14 @@ yarn start
 
 ## Logic implemented
 ### case of clicking the drop down menu only
-- In this case the page `./src/pages/Search.tsx` is called, and thereafter it will `<SearchFields />` component. This component contains the input field and the dropdown menu that `<DropDown/>` is composed by 3 subcomponent `<Toggle/>`, `<List/>` and `<Item/>`
+- In this case the page `./src/pages/Search.tsx` is called, and thereafter it will show `<SearchFields />` component. This component contains the input field and the dropdown menu, that `<DropDown/>` is composed by 3 subcomponent `<Toggle/>`, `<List/>` and `<Item/>`
 -  The `<Toggle/>` component when it's clicked, it dispatchs an action that change a boolean state attribute in the redux sotre related to the `<List/>` component. When it's true `<List/>` component is diplayed else it's hiden
 - `<List/>` component wraps `<Item/>` component. Items to list in our list of items is determined by porps passed from `<DropDown/>` component
-- `<Item/>` component it dispatch an action that tells the `<List/>` component to desapear, and save in our store the name of choosen dropdown item  
+- When we click `<Item/>` component it dispatch an action that tells the `<List/>` component to desapear, and save in our store the name of choosen dropdown item  
 - we use svg to drow up and down arrows
 ### case of filling the input field
-- when we start filling the input field, if we insert 3 or more characters we dispatch an action the calls an axios fetch. We have also a use effect that help us make a history push to the respictive route.
-- in case of removing characters until length is less than 3, we should be redirected thanks to useEffect
+- when we start filling the input field, if we insert 3 or more characters we dispatch an action that calls axios. We have also a use effect that help us make a history push to the respictive route.
+- in case of removing characters until length is less than 3, we should be redirected to search page thanks to useEffect
 ### when dispatch is called
 - when we call dispatch it will call an action fucntion that returns type (action type) and payload
 - in parallel we have reducer that listen for spesific action type. case of specific action we update the shared state
@@ -158,6 +158,8 @@ yarn start
 - work on styling and animation
 - fix debounce with dispatch
 - fetch addtional users details
+- enhence error handling
+- improve code reusability
 
 
 
