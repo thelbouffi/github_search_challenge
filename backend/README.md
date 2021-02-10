@@ -13,26 +13,26 @@ redis-cli ping
 - Install dependencies by running the following command on your terminal
 
 ```bash
-npm i
+npm i #or yarn install
 ```
 
 - Start your dev server by running:
 
 ```bash
-npm run dev
+npm run dev #or yarn run dev
 ```
 
 ## Build TypeScript Code
 In order to compile `typescript` code, and generate the javascript code, you need to run this command:
 
 ```bash
-npm run build
+npm run build #or yarn run build
 ```
 
 After building the project, you can start the project by either running this command:
 
 ```bash
-npm start
+npm start #or yarn start
 ```
 
 ## Endpoints
@@ -79,7 +79,7 @@ http://0.0.0.0:3001/api/search?per_page=10&page=1
 - The `./src/jsonSchemas` contains request body json schema
 
 ## Routes calls
-### POST http://0.0.0.0:3001/api/search/
+### POST http://localhost:3001/api/search/
 - If we make a post request to the server, with new query that is not saved on redis it will trigger the call of the following controllers:
 - validateBody: calls ajv, validate the schema if it's correct, if yes it returns next(), to got to the next controller. and if any error is cateched then we stop the request and return the error
 - redisSearch: check if the request have been already made and still exist on the memory, if yes it responds the results to the user and finish the request, else it goes to the next middlware, and if any error hapend then we cached it and stop the request
@@ -91,7 +91,7 @@ http://0.0.0.0:3001/api/search?per_page=10&page=1
   - Calling the the request for a second time takes less amount of time than in the firest time, thanks to redis, from wehre we take our result and not from github
   - The cached result expires after 2 hours
 
-### GET http://0.0.0.0:3001/api/clear-cache  
+### GET http://localhost:3001/api/clear-cache  
 - When calling this end point we will call a controller that calls redis command that flush the database
 
 ## Next Steps

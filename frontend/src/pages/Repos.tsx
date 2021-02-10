@@ -43,8 +43,8 @@ const Repos: FC = () => {
         </div>
       ) : (
         <Flex flexDirection="row" alignItems="center" width="100%" flexWrap="wrap">
-          {items.map((i, key) => {
-            return <RepoDetails repoDetails={i} key={key} />;
+          {items.map((i) => {
+            return <RepoDetails repoDetails={i} key={i.id} />;
           })}
         </Flex>
       )}

@@ -50,8 +50,8 @@ const Users: FC = () => {
         </div>
       ) : (
         <Flex flexDirection="row" alignItems="center" width="100%" flexWrap="wrap">
-          {items.map((i, key) => {
-            return <UserDetails userDetails={i} key={key} />;
+          {items.map((i) => {
+            return <UserDetails userDetails={i} key={i.id} />;
           })}
         </Flex>
       )}
